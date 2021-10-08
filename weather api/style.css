@@ -20,7 +20,8 @@ input {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   font-family: inherit;
   padding: 1rem;
-  min-width: 300px
+  min-width: 300px;
+  font-size: 1rem;
 }
 
 input:focus {
@@ -34,6 +35,8 @@ input:focus {
 
 .weather h2 {
   margin-bottom: 0;
+  /* display: flex;
+  align-items: center; */
 }
 
 
