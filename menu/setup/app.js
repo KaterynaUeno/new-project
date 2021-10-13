@@ -71,35 +71,62 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "Seabass dinner",
+    category: "dinner",
+    price: 25.50,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
 
 const sectionCenter = document.querySelector('.section-center');
 
-const filterBtns = document.querySelectorAll('.filter-btn');
+const btnContainer = document.querySelector('.btn-container');
 
-
-// filter items
-filterBtns.forEach(function(btn){
-  btn.addEventListener('click', function(event){
-// console.log(event.currentTarget.dataset);
-    const category = event.currentTarget.dataset.name;
-    const menuCategory = menu.filter(function(menuItem){
-      if (menuItem.category === category) {
-        return menuItem;
-      }
-    });
-    if (category === 'all') {
-      displayMenu(menu);
-    } else {
-      displayMenu(menuCategory);
-    }
-  });
-});
 
 
 // load items
 window.addEventListener('DOMContentLoaded', function(){
  displayMenu(menu);
+// const categories = menu.map(function(item){
+//   return item.category;
+// });
+// console.log(categories);
+
+const categories = menu.reduce(
+  function(values, item){
+    if (!values.includes(item.category)) {
+      values.push(item.category);
+    }
+  return values;
+},
+['all']);
+// console.log(categories);
+  const categoryBtns = categories.map(function(category){
+    return `<button class="filter-btn" type="button" data-name=${category}>${category}</button>`
+  }).join('');
+  // console.log(categoryBtns);
+  btnContainer.innerHTML = categoryBtns;
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  // filter items
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function (event) {
+      // console.log(event.currentTarget.dataset);
+      const category = event.currentTarget.dataset.name;
+      const menuCategory = menu.filter(function (menuItem) {
+        if (menuItem.category === category) {
+          return menuItem;
+        }
+      });
+      if (category === 'all') {
+        displayMenu(menu);
+      } else {
+        displayMenu(menuCategory);
+      }
+    });
+  });
 });
 
 
